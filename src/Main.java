@@ -42,18 +42,23 @@ public class Main {
         System.out.print("| >> "+message+" : ");
         return scanner.nextLine();
     }
+    public static int iptInt(String message){
+        System.out.print("| >> "+message+" : ");
+        int i = scanner.nextInt();
+        return i;
+    }
     public static boolean removeData(int number){
-        if ((number - 1) < 0 || (number - 1) > model.length) {
+        if (((number - 1) >= model.length) || ((number - 1) < 0) || (model[number - 1] == null)){
             return false;
-        }else {
-            model[number - 1] = null;
-            return true;
-
-            for (var i=0; i<model.length; i++){
-                if (model[i-1] == null){
-                    model[i-1] = model[i];
+        }else{
+            for (var i=(number-1); i< model.length; i++){
+                if (i == (model.length - 1)){
+                    model[i] = null;
+                }else{
+                    model[i] = model[i+1];
                 }
             }
+            return true;
         }
     }
     public static void methodTesting(){
@@ -61,7 +66,10 @@ public class Main {
             var ipt = iptStr("Masukkan Data").toUpperCase();
             addData(ipt);
         }
-        removeData(2);
+        for (var i=0; i<3; i++){
+            var iptNum = iptInt("Masukan nomor data yang ingin dihapus");
+            removeData(iptNum);
+        }
         showData();
     }
 }
